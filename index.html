@@ -18,7 +18,6 @@
     }
 
     *{box-sizing:border-box}
-
     html{scroll-behavior:smooth}
 
     body{
@@ -32,7 +31,6 @@
 
     button{font-family:inherit}
 
-    /* ---------- intro ---------- */
     .intro{
       position:fixed;
       inset:0;
@@ -88,19 +86,23 @@
       48%{transform:scale(1.11)}
     }
 
+    .ready-btn,
+    .final-button{
+      border:0;
+      border-radius:999px;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--rose),var(--rose-dark));
+      box-shadow:0 16px 42px rgba(214,41,103,.28);
+    }
+
     .ready-btn{
       display:none;
       width:min(100%,340px);
       min-height:54px;
       margin:26px auto 0;
-      border:0;
-      border-radius:999px;
-      color:white;
       font-size:17px;
-      font-weight:bold;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--rose),var(--rose-dark));
-      box-shadow:0 16px 42px rgba(214,41,103,.28);
       animation:fadeUp .8s ease both;
     }
 
@@ -109,7 +111,6 @@
       to{opacity:1;transform:translateY(0)}
     }
 
-    /* ---------- main ---------- */
     .page{
       min-height:100vh;
       padding:24px 12px 80px;
@@ -214,6 +215,15 @@
       transform:translateY(0);
     }
 
+    .final-button{
+      display:none;
+      width:min(100%,390px);
+      min-height:54px;
+      margin:18px auto 0;
+      font-size:16px;
+      animation:fadeUp .9s ease both;
+    }
+
     .player{
       margin-top:24px;
       padding:17px;
@@ -257,7 +267,6 @@
       font-size:12px;
     }
 
-    /* ---------- finale overlay ---------- */
     .finale{
       position:fixed;
       inset:0;
@@ -314,7 +323,7 @@
       font-size:1.25em;
     }
 
-    .replay{
+    .close-finale{
       display:none;
       width:min(100%,300px);
       min-height:50px;
@@ -346,13 +355,6 @@
       .card{padding:10px;border-radius:23px}
       .content{padding:27px 12px 14px}
       .typed-area{min-height:395px}
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-      }
     }
   </style>
 </head>
@@ -394,6 +396,10 @@
           ممنونم که هستی. 🌹
         </div>
 
+        <button id="finalButton" class="final-button" type="button">
+          یه پیام آخر برات دارم...
+        </button>
+
         <section class="player">
           <button id="playButton" class="play-btn" type="button">
             پخش آهنگ
@@ -405,7 +411,7 @@
 
           <div id="time" class="time">00:00 / 00:00</div>
 
-          <audio id="music" preload="metadata">
+          <audio id="music" preload="metadata" loop>
             <source src="music.mp3" type="audio/mpeg">
           </audio>
         </section>
@@ -422,8 +428,8 @@
         <strong>کوروش ❤️</strong>
       </div>
 
-      <button id="replayButton" class="replay" type="button">
-        دوباره دیدن
+      <button id="closeFinale" class="close-finale" type="button">
+        برگشتن به صفحه
       </button>
     </div>
   </section>
@@ -450,8 +456,8 @@
 و ماندگارتر از تمام زمان‌ها. ❤️`;
 
     const finaleMessages = [
-      "اگر تا اینجا موندی...",
-      "یعنی ارزشش رو داشت که اینو برات بسازم.",
+      "فقط یه چیز مونده...",
+      "ممنونم که هستی...",
       "دوستت دارم ❤️"
     ];
 
@@ -462,6 +468,7 @@
 
     const typedText = document.getElementById("typedText");
     const aside = document.getElementById("aside");
+    const finalButton = document.getElementById("finalButton");
     const music = document.getElementById("music");
     const playButton = document.getElementById("playButton");
     const progress = document.getElementById("progress");
@@ -471,10 +478,11 @@
     const finale = document.getElementById("finale");
     const finaleLine = document.getElementById("finaleLine");
     const signature = document.getElementById("signature");
-    const replayButton = document.getElementById("replayButton");
+    const closeFinale = document.getElementById("closeFinale");
 
     let typingStarted = false;
     let introIndex = 0;
+    let finaleRunning = false;
 
     function showIntroMessage(){
       introLine.classList.remove("show");
@@ -503,7 +511,6 @@
     function typeMainMessage(){
       if(typingStarted) return;
       typingStarted = true;
-
       let index = 0;
 
       function next(){
@@ -513,7 +520,14 @@
           index++;
           setTimeout(next,current === "\n" ? 170 : 45);
         }else{
-          setTimeout(()=>aside.classList.add("show"),1200);
+          setTimeout(()=>{
+            aside.classList.add("show");
+
+            setTimeout(()=>{
+              finalButton.style.display = "block";
+              finalButton.scrollIntoView({behavior:"smooth",block:"center"});
+            },1300);
+          },1000);
         }
       }
 
@@ -551,7 +565,7 @@
     });
 
     music.addEventListener("pause",()=>{
-      if(!music.ended) playButton.textContent = "ادامه آهنگ";
+      playButton.textContent = "ادامه آهنگ";
     });
 
     function formatTime(seconds){
@@ -576,7 +590,10 @@
     });
 
     function showFinale(){
+      if(finaleRunning) return;
+      finaleRunning = true;
       finale.classList.add("show");
+
       let i = 0;
 
       function nextLine(){
@@ -594,8 +611,8 @@
             }else{
               setTimeout(()=>{
                 signature.style.display = "block";
-                replayButton.style.display = "block";
-              },1100);
+                closeFinale.style.display = "block";
+              },1000);
             }
           },2200);
         },450);
@@ -604,10 +621,15 @@
       nextLine();
     }
 
-    music.addEventListener("ended",showFinale);
+    finalButton.addEventListener("click",showFinale);
 
-    replayButton.addEventListener("click",()=>{
-      location.reload();
+    closeFinale.addEventListener("click",()=>{
+      finale.classList.remove("show");
+      finaleRunning = false;
+      signature.style.display = "none";
+      closeFinale.style.display = "none";
+      finaleLine.textContent = "";
+      finaleLine.classList.remove("show");
     });
 
     function createParticle(){
