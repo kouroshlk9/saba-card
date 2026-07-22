@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050307">
+  <meta name="theme-color" content="#070509">
   <title>برای صبا ❤️</title>
 
   <style>
     :root{
-      --bg:#050307;
+      --bg:#070509;
+      --card:rgba(20,14,23,.74);
       --text:#fffafc;
       --muted:#d8cbd1;
-      --rose:#ff5e91;
-      --rose-dark:#a41149;
-      --glass:rgba(25,12,29,.72);
-      --line:rgba(255,255,255,.12);
+      --rose:#ff648f;
+      --rose-dark:#a8134a;
+      --line:rgba(255,255,255,.11);
+      --bubble:rgba(255,255,255,.075);
     }
 
     *{box-sizing:border-box}
@@ -31,6 +32,7 @@
 
     button{font-family:inherit}
 
+    /* ---------- INTRO ---------- */
     .intro{
       position:fixed;
       inset:0;
@@ -39,8 +41,8 @@
       place-items:center;
       padding:24px;
       background:
-        radial-gradient(circle at center,rgba(99,20,64,.15),transparent 35%),
-        #030205;
+        radial-gradient(circle at 50% 45%,rgba(115,28,71,.14),transparent 34%),
+        #040306;
       transition:opacity 1s ease,visibility 1s ease;
     }
 
@@ -55,55 +57,43 @@
       text-align:center;
     }
 
-    .intro-line{
-      min-height:92px;
+    .intro-text{
+      min-height:110px;
       margin:0;
       opacity:0;
       transform:translateY(12px);
-      font-size:clamp(25px,6.7vw,43px);
+      font-size:clamp(26px,6.8vw,44px);
       line-height:1.9;
-      color:#fff;
-      transition:opacity .85s ease,transform .85s ease;
+      transition:opacity .8s ease,transform .8s ease;
     }
 
-    .intro-line.show{
+    .intro-text.show{
       opacity:1;
       transform:translateY(0);
     }
 
-    .small-heart{
+    .promise-btn{
       display:none;
-      margin:24px auto 0;
-      font-size:42px;
-      animation:heartbeat 1.35s infinite;
-      filter:drop-shadow(0 0 20px rgba(255,84,141,.6));
-    }
-
-    @keyframes heartbeat{
-      0%,100%{transform:scale(1)}
-      17%{transform:scale(1.18)}
-      32%{transform:scale(1)}
-      48%{transform:scale(1.11)}
-    }
-
-    .ready-btn,
-    .final-button{
+      width:min(100%,340px);
+      min-height:56px;
+      margin:28px auto 0;
       border:0;
       border-radius:999px;
-      color:white;
+      color:#fff;
+      font-size:17px;
       font-weight:bold;
       cursor:pointer;
       background:linear-gradient(135deg,var(--rose),var(--rose-dark));
-      box-shadow:0 16px 42px rgba(214,41,103,.28);
+      box-shadow:0 16px 42px rgba(215,42,104,.27);
+      animation:fadeUp .8s ease both;
     }
 
-    .ready-btn{
+    .intro-note{
       display:none;
-      width:min(100%,340px);
-      min-height:54px;
-      margin:26px auto 0;
-      font-size:17px;
-      animation:fadeUp .8s ease both;
+      margin-top:12px;
+      color:#bfaeb6;
+      font-size:12px;
+      animation:fadeUp .8s ease .1s both;
     }
 
     @keyframes fadeUp{
@@ -111,29 +101,30 @@
       to{opacity:1;transform:translateY(0)}
     }
 
+    /* ---------- MAIN ---------- */
     .page{
       min-height:100vh;
-      padding:24px 12px 80px;
+      padding:20px 10px 88px;
       background:
-        linear-gradient(rgba(7,3,9,.28),rgba(7,3,9,.84)),
-        url("saba.jpg") center top/cover fixed;
+        linear-gradient(rgba(7,4,9,.30),rgba(7,4,9,.88)),
+        url("saba.jpg?v=final") center top/cover fixed;
     }
 
     .card{
-      width:min(94%,760px);
+      width:min(95%,760px);
       margin:0 auto;
-      padding:16px;
+      padding:12px;
       border:1px solid var(--line);
-      border-radius:30px;
-      background:var(--glass);
+      border-radius:28px;
+      background:var(--card);
       backdrop-filter:blur(16px);
-      box-shadow:0 30px 100px rgba(0,0,0,.6);
+      box-shadow:0 30px 100px rgba(0,0,0,.58);
     }
 
     .image-wrap{
       overflow:hidden;
-      border-radius:22px;
-      box-shadow:0 18px 50px rgba(0,0,0,.45);
+      border-radius:20px;
+      box-shadow:0 18px 48px rgba(0,0,0,.42);
     }
 
     .image{
@@ -141,100 +132,85 @@
       width:100%;
       max-height:760px;
       object-fit:contain;
-      background:rgba(0,0,0,.14);
-      animation:slowZoom 15s ease-in-out infinite alternate;
+      background:rgba(0,0,0,.13);
+      animation:slowZoom 16s ease-in-out infinite alternate;
     }
 
     @keyframes slowZoom{
       from{transform:scale(1)}
-      to{transform:scale(1.035)}
+      to{transform:scale(1.032)}
     }
 
     .content{
-      padding:30px 18px 18px;
-      text-align:center;
+      padding:28px 14px 16px;
     }
 
     .title{
       margin:0;
-      font-size:clamp(32px,7vw,50px);
-      color:#ffdbe5;
+      text-align:center;
+      font-size:clamp(32px,7vw,48px);
+      color:#ffdce6;
     }
 
     .subtitle{
-      margin:10px 0 26px;
+      margin:9px auto 25px;
+      text-align:center;
       color:var(--muted);
       line-height:1.9;
-      font-size:15px;
+      font-size:14px;
     }
 
     .divider{
-      width:82px;
+      width:76px;
       height:1px;
-      margin:0 auto 28px;
-      background:linear-gradient(90deg,transparent,#ff8fb1,transparent);
+      margin:0 auto 26px;
+      background:linear-gradient(90deg,transparent,#ff91b0,transparent);
     }
 
-    .typed-area{
-      min-height:340px;
+    /* message bubbles */
+    .messages{
       display:flex;
-      justify-content:center;
-      align-items:flex-start;
+      flex-direction:column;
+      gap:13px;
+      min-height:330px;
     }
 
-    .typed-text{
-      max-width:660px;
-      white-space:pre-line;
-      line-height:2.25;
-      font-size:clamp(17px,4vw,20px);
+    .bubble{
+      max-width:88%;
+      padding:14px 16px;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:18px 18px 5px 18px;
+      background:var(--bubble);
       color:#fff9fb;
-    }
-
-    .cursor{
-      display:inline-block;
-      margin-right:3px;
-      color:#ff8fb1;
-      animation:blink .8s infinite;
-    }
-
-    @keyframes blink{50%{opacity:0}}
-
-    .aside{
-      min-height:92px;
-      margin-top:22px;
+      font-size:clamp(16px,4vw,19px);
+      line-height:2;
+      text-align:right;
       opacity:0;
       transform:translateY(12px);
-      transition:opacity 1s ease,transform 1s ease;
-      color:#ffdce6;
-      font-size:clamp(18px,4.5vw,24px);
-      line-height:2;
+      transition:opacity .65s ease,transform .65s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.14);
     }
 
-    .aside.show{
+    .bubble.show{
       opacity:1;
       transform:translateY(0);
     }
 
-    .final-button{
+    .bubble.soft{
+      color:#ffdce6;
+      background:rgba(255,100,143,.08);
+    }
+
+    .last-message-wrap{
+      min-height:80px;
+      margin-top:22px;
+      text-align:center;
+    }
+
+    .last-message-btn{
       display:none;
       width:min(100%,390px);
       min-height:54px;
-      margin:18px auto 0;
-      font-size:16px;
-      animation:fadeUp .9s ease both;
-    }
-
-    .player{
-      margin-top:24px;
-      padding:17px;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.055);
-    }
-
-    .play-btn{
-      width:100%;
-      min-height:50px;
       border:0;
       border-radius:999px;
       color:white;
@@ -242,31 +218,40 @@
       font-weight:bold;
       cursor:pointer;
       background:linear-gradient(135deg,var(--rose),var(--rose-dark));
+      box-shadow:0 15px 38px rgba(215,42,104,.25);
+      animation:fadeUp .8s ease both;
     }
 
-    .progress{
-      height:7px;
-      margin-top:16px;
-      overflow:hidden;
-      border-radius:999px;
+    /* minimal music control */
+    .music-fab{
+      position:fixed;
+      left:16px;
+      bottom:16px;
+      z-index:30;
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:50%;
+      color:#fff;
+      font-size:20px;
       cursor:pointer;
-      background:rgba(255,255,255,.13);
+      background:rgba(20,10,23,.78);
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
 
-    .progress-fill{
-      width:0;
-      height:100%;
-      background:linear-gradient(90deg,#ffd0df,#ff4f86);
+    .music-fab.playing{
+      animation:pulseMusic 1.6s ease-in-out infinite;
     }
 
-    .time{
-      margin-top:8px;
-      direction:ltr;
-      text-align:left;
-      color:#c8b8bf;
-      font-size:12px;
+    @keyframes pulseMusic{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.07)}
     }
 
+    /* ---------- FINALE ---------- */
     .finale{
       position:fixed;
       inset:0;
@@ -277,9 +262,9 @@
       opacity:0;
       visibility:hidden;
       background:
-        radial-gradient(circle at center,rgba(105,20,67,.14),transparent 34%),
-        rgba(2,1,3,.96);
-      transition:opacity 1.2s ease,visibility 1.2s ease;
+        radial-gradient(circle at center,rgba(105,20,67,.12),transparent 34%),
+        rgba(3,2,4,.97);
+      transition:opacity 1s ease,visibility 1s ease;
     }
 
     .finale.show{
@@ -292,48 +277,49 @@
       text-align:center;
     }
 
-    .finale-line{
-      min-height:86px;
+    .finale-text{
+      min-height:100px;
       margin:0;
       opacity:0;
       transform:translateY(12px);
-      font-size:clamp(24px,6vw,40px);
+      font-size:clamp(25px,6vw,42px);
       line-height:1.9;
-      transition:opacity .9s ease,transform .9s ease;
+      transition:opacity .8s ease,transform .8s ease;
     }
 
-    .finale-line.show{
+    .finale-text.show{
       opacity:1;
       transform:translateY(0);
     }
 
     .signature{
       display:none;
-      margin-top:26px;
-      color:#ffd7e3;
-      font-size:clamp(22px,5vw,32px);
-      line-height:2;
+      margin-top:28px;
+      color:#fff;
+      font-size:clamp(26px,6vw,40px);
+      line-height:1.9;
       animation:fadeUp 1s ease both;
     }
 
-    .signature strong{
+    .signature small{
       display:block;
-      margin-top:8px;
-      color:#fff;
-      font-size:1.25em;
+      margin-bottom:2px;
+      color:#d9cbd1;
+      font-size:.55em;
+      font-weight:normal;
     }
 
-    .close-finale{
+    .close-btn{
       display:none;
-      width:min(100%,300px);
-      min-height:50px;
-      margin:24px auto 0;
-      border:1px solid rgba(255,255,255,.14);
+      width:min(100%,280px);
+      min-height:48px;
+      margin:26px auto 0;
+      border:1px solid rgba(255,255,255,.13);
       border-radius:999px;
       color:#fff;
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.055);
       cursor:pointer;
-      animation:fadeUp 1s ease both;
+      animation:fadeUp 1s ease .1s both;
     }
 
     .particle{
@@ -342,19 +328,27 @@
       top:-40px;
       pointer-events:none;
       animation:fall linear forwards;
-      filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));
+      filter:drop-shadow(0 4px 6px rgba(0,0,0,.23));
     }
 
     @keyframes fall{
       0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0}
-      10%{opacity:.85}
-      100%{transform:translate3d(var(--drift),112vh,0) rotate(500deg);opacity:0}
+      10%{opacity:.82}
+      100%{transform:translate3d(var(--drift),112vh,0) rotate(480deg);opacity:0}
     }
 
     @media(max-width:560px){
-      .card{padding:10px;border-radius:23px}
-      .content{padding:27px 12px 14px}
-      .typed-area{min-height:395px}
+      .card{border-radius:22px}
+      .content{padding:26px 10px 14px}
+      .messages{min-height:400px}
+      .bubble{max-width:94%}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+      }
     }
   </style>
 </head>
@@ -362,74 +356,63 @@
 <body>
   <section id="intro" class="intro">
     <div class="intro-inner">
-      <p id="introLine" class="intro-line"></p>
-      <div id="smallHeart" class="small-heart">❤️</div>
-      <button id="readyButton" class="ready-btn" type="button">آماده‌ام</button>
+      <p id="introText" class="intro-text"></p>
+
+      <button id="promiseButton" class="promise-btn" type="button">
+        قول می‌دم ❤️
+      </button>
+
+      <div id="introNote" class="intro-note">
+        بهتره صدا روشن باشه
+      </div>
     </div>
   </section>
 
   <main class="page">
     <article class="card">
       <div class="image-wrap">
-        <img class="image" src="saba.jpg" alt="برای صبا">
+        <img class="image" src="saba.jpg?v=final" alt="برای صبا">
       </div>
 
       <section class="content">
         <h1 class="title">صبا جان ❤️</h1>
 
         <p class="subtitle">
-          شاید این صفحه خیلی ساده باشد؛
-          اما حرف‌هایش واقعی‌اند.
+          شاید این صفحه ساده باشه؛ ولی حرف‌هاش واقعی‌ان.
         </p>
 
         <div class="divider"></div>
 
-        <div class="typed-area">
-          <div>
-            <span id="typedText" class="typed-text"></span>
-            <span class="cursor">|</span>
-          </div>
-        </div>
+        <div id="messages" class="messages"></div>
 
-        <div id="aside" class="aside">
-          راستی...<br>
-          ممنونم که هستی. 🌹
-        </div>
-
-        <button id="finalButton" class="final-button" type="button">
-          یه پیام آخر برات دارم...
-        </button>
-
-        <section class="player">
-          <button id="playButton" class="play-btn" type="button">
-            پخش آهنگ
+        <div class="last-message-wrap">
+          <button id="lastMessageButton" class="last-message-btn" type="button">
+            یه چیز کوچیک دیگه مونده...
           </button>
-
-          <div id="progress" class="progress">
-            <div id="progressFill" class="progress-fill"></div>
-          </div>
-
-          <div id="time" class="time">00:00 / 00:00</div>
-
-          <audio id="music" preload="metadata" loop>
-            <source src="music.mp3" type="audio/mpeg">
-          </audio>
-        </section>
+        </div>
       </section>
     </article>
   </main>
 
+  <button id="musicButton" class="music-fab" type="button" aria-label="کنترل آهنگ">
+    🎵
+  </button>
+
+  <audio id="music" preload="metadata" loop>
+    <source src="music.mp3?v=final" type="audio/mpeg">
+  </audio>
+
   <section id="finale" class="finale">
     <div class="finale-inner">
-      <p id="finaleLine" class="finale-line"></p>
+      <p id="finaleText" class="finale-text"></p>
 
       <div id="signature" class="signature">
-        با عشق...
-        <strong>کوروش ❤️</strong>
+        <small>با عشق...</small>
+        کوروش
       </div>
 
-      <button id="closeFinale" class="close-finale" type="button">
-        برگشتن به صفحه
+      <button id="closeButton" class="close-btn" type="button">
+        برگشتن
       </button>
     </div>
   </section>
@@ -437,59 +420,51 @@
   <script>
     const introMessages = [
       "سلام صبا 😊",
-      "یه چیزی هست که دلم می‌خواست فقط خودت ببینیش...",
-      "شاید هیچ‌وقت نتونم همه‌ی حسم رو با حرف زدن بگم...",
-      "ولی گفتم شاید اینجوری بهتر بتونم نشونش بدم."
+      "امروز فقط یه خواهش ازت دارم...",
+      "تا آخر این صفحه باهام بمون...",
+      "قول؟"
     ];
 
-    const mainMessage =
-`تو شبیه آرامشی هستی که بعد از هر طوفان،
-دل به دنبالش می‌گردد.
-
-حضورت، ساده‌ترین لحظه‌های زندگی را
-به زیباترین خاطره‌ها تبدیل می‌کند.
-
-لبخندت دلیل روشن روزهایم و نامت
-زیباترین واژه‌ای‌ست که قلبم می‌شناسد.
-
-دوستت دارم؛ عمیق‌تر از تمام واژه‌ها
-و ماندگارتر از تمام زمان‌ها. ❤️`;
+    const messageBubbles = [
+      "تو شبیه آرامشی هستی که بعد از هر طوفان، دل به دنبالش می‌گرده.",
+      "حضورت، ساده‌ترین لحظه‌های زندگی رو به زیباترین خاطره‌ها تبدیل می‌کنه.",
+      "لبخندت دلیل روشن روزهامه و اسمت زیباترین واژه‌ایه که قلبم می‌شناسه.",
+      "دوستت دارم؛ عمیق‌تر از تمام واژه‌ها و موندگارتر از تمام زمان‌ها. ❤️",
+      "راستی...",
+      "ممنونم که هستی. 🌹"
+    ];
 
     const finaleMessages = [
-      "فقط یه چیز مونده...",
-      "ممنونم که هستی...",
+      "اگر تا اینجا موندی...",
+      "یعنی ارزشش رو داشت.",
       "دوستت دارم ❤️"
     ];
 
     const intro = document.getElementById("intro");
-    const introLine = document.getElementById("introLine");
-    const smallHeart = document.getElementById("smallHeart");
-    const readyButton = document.getElementById("readyButton");
+    const introText = document.getElementById("introText");
+    const promiseButton = document.getElementById("promiseButton");
+    const introNote = document.getElementById("introNote");
 
-    const typedText = document.getElementById("typedText");
-    const aside = document.getElementById("aside");
-    const finalButton = document.getElementById("finalButton");
+    const messages = document.getElementById("messages");
+    const lastMessageButton = document.getElementById("lastMessageButton");
     const music = document.getElementById("music");
-    const playButton = document.getElementById("playButton");
-    const progress = document.getElementById("progress");
-    const progressFill = document.getElementById("progressFill");
-    const timeLabel = document.getElementById("time");
+    const musicButton = document.getElementById("musicButton");
 
     const finale = document.getElementById("finale");
-    const finaleLine = document.getElementById("finaleLine");
+    const finaleText = document.getElementById("finaleText");
     const signature = document.getElementById("signature");
-    const closeFinale = document.getElementById("closeFinale");
+    const closeButton = document.getElementById("closeButton");
 
-    let typingStarted = false;
     let introIndex = 0;
+    let messagesStarted = false;
     let finaleRunning = false;
 
     function showIntroMessage(){
-      introLine.classList.remove("show");
+      introText.classList.remove("show");
 
       setTimeout(()=>{
-        introLine.textContent = introMessages[introIndex];
-        introLine.classList.add("show");
+        introText.textContent = introMessages[introIndex];
+        introText.classList.add("show");
 
         setTimeout(()=>{
           introIndex++;
@@ -498,95 +473,70 @@
             showIntroMessage();
           }else{
             setTimeout(()=>{
-              smallHeart.style.display = "block";
-              readyButton.style.display = "block";
-            },900);
+              promiseButton.style.display = "block";
+              introNote.style.display = "block";
+            },700);
           }
-        },2100);
-      },450);
+        },1700);
+      },350);
     }
 
     showIntroMessage();
 
-    function typeMainMessage(){
-      if(typingStarted) return;
-      typingStarted = true;
-      let index = 0;
-
-      function next(){
-        if(index < mainMessage.length){
-          typedText.textContent += mainMessage[index];
-          const current = mainMessage[index];
-          index++;
-          setTimeout(next,current === "\n" ? 170 : 45);
-        }else{
-          setTimeout(()=>{
-            aside.classList.add("show");
-
-            setTimeout(()=>{
-              finalButton.style.display = "block";
-              finalButton.scrollIntoView({behavior:"smooth",block:"center"});
-            },1300);
-          },1000);
-        }
-      }
-
-      next();
-    }
-
-    readyButton.addEventListener("click",async()=>{
+    async function startExperience(){
       intro.classList.add("hide");
-      typeMainMessage();
 
       try{
         await music.play();
-        playButton.textContent = "توقف آهنگ";
+        musicButton.classList.add("playing");
+        musicButton.textContent = "⏸";
       }catch(error){
-        playButton.textContent = "پخش آهنگ";
+        musicButton.textContent = "🎵";
       }
-    });
 
-    playButton.addEventListener("click",async()=>{
+      showMessageBubbles();
+    }
+
+    promiseButton.addEventListener("click",startExperience);
+
+    function showMessageBubbles(){
+      if(messagesStarted) return;
+      messagesStarted = true;
+
+      messageBubbles.forEach((text,index)=>{
+        const bubble = document.createElement("div");
+        bubble.className = "bubble" + (index >= 4 ? " soft" : "");
+        bubble.textContent = text;
+        messages.appendChild(bubble);
+
+        setTimeout(()=>{
+          bubble.classList.add("show");
+          bubble.scrollIntoView({behavior:"smooth",block:"center"});
+        },900 + index * 1900);
+      });
+
+      const totalDelay = 900 + messageBubbles.length * 1900;
+
+      setTimeout(()=>{
+        lastMessageButton.style.display = "inline-block";
+        lastMessageButton.scrollIntoView({behavior:"smooth",block:"center"});
+      },totalDelay + 500);
+    }
+
+    musicButton.addEventListener("click",async()=>{
       if(music.paused){
         try{
           await music.play();
-          playButton.textContent = "توقف آهنگ";
+          musicButton.textContent = "⏸";
+          musicButton.classList.add("playing");
         }catch(error){
           alert("آهنگ پخش نشد. فایل music.mp3 را بررسی کن.");
         }
       }else{
         music.pause();
-        playButton.textContent = "ادامه آهنگ";
+        musicButton.textContent = "🎵";
+        musicButton.classList.remove("playing");
       }
-    });
-
-    music.addEventListener("play",()=>{
-      playButton.textContent = "توقف آهنگ";
-    });
-
-    music.addEventListener("pause",()=>{
-      playButton.textContent = "ادامه آهنگ";
-    });
-
-    function formatTime(seconds){
-      if(!Number.isFinite(seconds)) return "00:00";
-      const m = Math.floor(seconds/60);
-      const s = Math.floor(seconds%60);
-      return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-    }
-
-    music.addEventListener("timeupdate",()=>{
-      const percent = music.duration ? (music.currentTime/music.duration)*100 : 0;
-      progressFill.style.width = percent + "%";
-      timeLabel.textContent =
-        `${formatTime(music.currentTime)} / ${formatTime(music.duration)}`;
-    });
-
-    progress.addEventListener("click",event=>{
-      if(!music.duration) return;
-      const rect = progress.getBoundingClientRect();
-      const ratio = (event.clientX - rect.left)/rect.width;
-      music.currentTime = Math.max(0,Math.min(1,ratio))*music.duration;
     });
 
     function showFinale(){
@@ -594,42 +544,42 @@
       finaleRunning = true;
       finale.classList.add("show");
 
-      let i = 0;
+      let index = 0;
 
-      function nextLine(){
-        finaleLine.classList.remove("show");
+      function nextFinale(){
+        finaleText.classList.remove("show");
 
         setTimeout(()=>{
-          finaleLine.textContent = finaleMessages[i];
-          finaleLine.classList.add("show");
+          finaleText.textContent = finaleMessages[index];
+          finaleText.classList.add("show");
 
           setTimeout(()=>{
-            i++;
+            index++;
 
-            if(i < finaleMessages.length){
-              nextLine();
+            if(index < finaleMessages.length){
+              nextFinale();
             }else{
               setTimeout(()=>{
                 signature.style.display = "block";
-                closeFinale.style.display = "block";
-              },1000);
+                closeButton.style.display = "inline-block";
+              },900);
             }
-          },2200);
-        },450);
+          },1900);
+        },350);
       }
 
-      nextLine();
+      nextFinale();
     }
 
-    finalButton.addEventListener("click",showFinale);
+    lastMessageButton.addEventListener("click",showFinale);
 
-    closeFinale.addEventListener("click",()=>{
+    closeButton.addEventListener("click",()=>{
       finale.classList.remove("show");
       finaleRunning = false;
+      finaleText.textContent = "";
+      finaleText.classList.remove("show");
       signature.style.display = "none";
-      closeFinale.style.display = "none";
-      finaleLine.textContent = "";
-      finaleLine.classList.remove("show");
+      closeButton.style.display = "none";
     });
 
     function createParticle(){
@@ -639,15 +589,15 @@
       particle.className = "particle";
       particle.textContent = symbols[Math.floor(Math.random()*symbols.length)];
       particle.style.left = Math.random()*100 + "vw";
-      particle.style.fontSize = 14 + Math.random()*16 + "px";
-      particle.style.animationDuration = 8 + Math.random()*7 + "s";
-      particle.style.setProperty("--drift",(-90 + Math.random()*180) + "px");
+      particle.style.fontSize = 13 + Math.random()*15 + "px";
+      particle.style.animationDuration = 9 + Math.random()*7 + "s";
+      particle.style.setProperty("--drift",(-80 + Math.random()*160) + "px");
 
       document.body.appendChild(particle);
-      setTimeout(()=>particle.remove(),15500);
+      setTimeout(()=>particle.remove(),16500);
     }
 
-    setInterval(createParticle,1000);
+    setInterval(createParticle,1200);
   </script>
 </body>
 </html>
