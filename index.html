@@ -1,282 +1,567 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050207">
+  <title>برای صبا جان ❤️</title>
 
-    <title>برای صبا جان ❤️</title>
+  <style>
+    :root{
+      --pink:#ff4f86;
+      --deep:#9d1244;
+      --cream:#fff7fa;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    *{box-sizing:border-box}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            padding: 20px;
-            font-family: Tahoma, Arial, sans-serif;
-            color: white;
+    html{scroll-behavior:smooth}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:Tahoma,Arial,sans-serif;
+      color:#fff;
+      background:#030104;
+    }
 
-            background:
-                linear-gradient(
-                    rgba(70, 10, 35, 0.45),
-                    rgba(35, 5, 20, 0.82)
-                ),
-                url("saba.jpg") center / cover fixed;
+    /* پرده آغازین */
+    .intro{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(circle at center, rgba(108,12,53,.22), transparent 42%),
+        #020103;
+      transition:opacity 1.2s ease,visibility 1.2s ease;
+    }
 
-            overflow-x: hidden;
-        }
+    .intro.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
 
-        .card {
-            width: min(95%, 650px);
-            padding: 26px 20px;
-            text-align: center;
+    .intro-content{
+      width:min(92%,620px);
+      text-align:center;
+    }
 
-            background: rgba(70, 12, 35, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 28px;
+    .intro-line{
+      min-height:75px;
+      margin:0;
+      opacity:0;
+      transform:translateY(14px);
+      font-size:clamp(27px,7vw,48px);
+      font-weight:bold;
+      color:#fff8fa;
+      text-shadow:0 0 24px rgba(255,79,134,.25);
+      transition:opacity 1s ease,transform 1s ease;
+    }
 
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
+    .intro-line.show{
+      opacity:1;
+      transform:translateY(0);
+    }
 
-        .photo {
-            display: block;
-            width: 100%;
-            max-height: 650px;
-            object-fit: contain;
-            border-radius: 20px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-        }
+    .intro-heart{
+      display:none;
+      margin:24px auto;
+      font-size:78px;
+      filter:drop-shadow(0 0 28px rgba(255,50,113,.78));
+      animation:heartbeat 1.25s infinite;
+    }
 
-        h1 {
-            margin: 26px 0 18px;
-            color: #ffd4df;
-            font-size: 32px;
-        }
+    @keyframes heartbeat{
+      0%,100%{transform:scale(1)}
+      15%{transform:scale(1.22)}
+      30%{transform:scale(1)}
+      45%{transform:scale(1.14)}
+    }
 
-        .message {
-            font-size: 18px;
-            line-height: 2.2;
-            color: #fff8fa;
-        }
+    .enter-button{
+      display:none;
+      width:min(100%,420px);
+      margin:20px auto 0;
+      padding:17px 24px;
+      border:0;
+      border-radius:999px;
+      font:inherit;
+      font-size:18px;
+      font-weight:bold;
+      color:#fff;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--pink),var(--deep));
+      box-shadow:0 12px 35px rgba(255,55,119,.34);
+      animation:fadeUp 1s ease both;
+    }
 
-        .music-box {
-            margin-top: 26px;
-            padding: 18px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(15px)}
+      to{opacity:1;transform:translateY(0)}
+    }
 
-        audio {
-            width: 100%;
-            margin-top: 12px;
-        }
+    /* محتوای اصلی */
+    .main{
+      min-height:100vh;
+      padding:24px 12px 70px;
+      background:
+        linear-gradient(rgba(21,1,13,.5),rgba(12,0,8,.88)),
+        url("saba.jpg") center/cover fixed;
+    }
 
-        .play-button {
-            width: 100%;
-            padding: 15px 24px;
+    .card{
+      width:min(94%,720px);
+      margin:0 auto;
+      padding:22px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:30px;
+      background:rgba(55,5,29,.75);
+      backdrop-filter:blur(12px);
+      box-shadow:0 24px 75px rgba(0,0,0,.58);
+    }
 
-            border: none;
-            border-radius: 50px;
+    .photo-frame{
+      overflow:hidden;
+      border-radius:23px;
+      box-shadow:0 15px 42px rgba(0,0,0,.48);
+    }
 
-            font-family: inherit;
-            font-size: 17px;
-            font-weight: bold;
-            color: white;
+    .photo{
+      display:block;
+      width:100%;
+      max-height:720px;
+      object-fit:contain;
+      background:rgba(0,0,0,.15);
+      animation:slowZoom 13s ease-in-out infinite alternate;
+    }
 
-            background: linear-gradient(135deg, #ff4f81, #b5164f);
-            box-shadow: 0 8px 25px rgba(255, 79, 129, 0.4);
+    @keyframes slowZoom{
+      from{transform:scale(1)}
+      to{transform:scale(1.035)}
+    }
 
-            cursor: pointer;
-        }
+    .title{
+      margin:30px 0 20px;
+      font-size:clamp(31px,7vw,46px);
+      color:#ffd9e4;
+      text-shadow:0 5px 20px rgba(0,0,0,.4);
+    }
 
-        .play-button:active {
-            transform: scale(0.97);
-        }
+    .typed-area{
+      min-height:310px;
+      white-space:pre-line;
+      font-size:clamp(17px,4.2vw,20px);
+      line-height:2.2;
+      color:var(--cream);
+    }
 
-        .status {
-            min-height: 24px;
-            margin-top: 12px;
-            color: #ffd4df;
-            font-size: 14px;
-        }
+    .cursor{
+      display:inline-block;
+      animation:blink .8s infinite;
+    }
 
-        .signature {
-            margin-top: 24px;
-            color: #ffd4df;
-            font-size: 19px;
-        }
+    @keyframes blink{50%{opacity:0}}
 
-        .heart {
-            position: fixed;
-            bottom: -40px;
-            pointer-events: none;
-            animation: floatUp linear forwards;
-            opacity: 0.8;
-        }
+    .music-box{
+      margin-top:24px;
+      padding:17px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+    }
 
-        @keyframes floatUp {
-            from {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.8;
-            }
+    .music-button{
+      width:100%;
+      min-height:53px;
+      padding:13px 20px;
+      border:0;
+      border-radius:999px;
+      font:inherit;
+      font-size:17px;
+      font-weight:bold;
+      color:#fff;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--pink),var(--deep));
+      box-shadow:0 10px 30px rgba(255,60,123,.33);
+    }
 
-            to {
-                transform: translateY(-115vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    .progress{
+      height:7px;
+      margin-top:17px;
+      overflow:hidden;
+      border-radius:999px;
+      cursor:pointer;
+      background:rgba(255,255,255,.17);
+    }
 
-        @media (max-width: 500px) {
-            body {
-                padding: 10px;
-            }
+    .progress-fill{
+      width:0;
+      height:100%;
+      background:linear-gradient(90deg,#ff9cba,#ff3e79);
+    }
 
-            .card {
-                padding: 18px 12px;
-            }
+    .time{
+      margin-top:8px;
+      direction:ltr;
+      font-size:13px;
+      color:#ffd5e0;
+    }
 
-            h1 {
-                font-size: 27px;
-            }
+    .ending{
+      margin-top:32px;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 1.2s ease,transform 1.2s ease;
+    }
 
-            .message {
-                font-size: 16px;
-                line-height: 2;
-            }
-        }
-    </style>
+    .ending.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .ending-text{
+      font-size:clamp(20px,5vw,27px);
+      line-height:2;
+      color:#ffd7e2;
+    }
+
+    .signature{
+      margin-top:18px;
+      font-size:19px;
+      line-height:2;
+      color:#fff0f5;
+    }
+
+    /* رز سه‌بعدی CSS */
+    .rose-scene{
+      width:150px;
+      height:170px;
+      margin:26px auto 5px;
+      perspective:600px;
+    }
+
+    .rose{
+      position:relative;
+      width:100px;
+      height:100px;
+      margin:auto;
+      transform-style:preserve-3d;
+      animation:roseFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes roseFloat{
+      0%,100%{transform:translateY(0) rotateY(-8deg)}
+      50%{transform:translateY(-10px) rotateY(8deg)}
+    }
+
+    .petal{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:46px;
+      height:64px;
+      margin-left:-23px;
+      margin-top:-32px;
+      border-radius:60% 45% 60% 45%;
+      transform-origin:50% 85%;
+      background:
+        radial-gradient(circle at 35% 25%,#ff668d 0 9%,#d4144f 42%,#7c082d 100%);
+      box-shadow:
+        inset 5px 4px 10px rgba(255,255,255,.16),
+        inset -7px -8px 13px rgba(60,0,20,.38),
+        0 5px 12px rgba(0,0,0,.25);
+    }
+
+    .p1{transform:rotate(0deg) translateY(-18px) rotateX(25deg)}
+    .p2{transform:rotate(60deg) translateY(-18px) rotateX(25deg)}
+    .p3{transform:rotate(120deg) translateY(-18px) rotateX(25deg)}
+    .p4{transform:rotate(180deg) translateY(-18px) rotateX(25deg)}
+    .p5{transform:rotate(240deg) translateY(-18px) rotateX(25deg)}
+    .p6{transform:rotate(300deg) translateY(-18px) rotateX(25deg)}
+
+    .inner{
+      width:34px;
+      height:48px;
+      margin-left:-17px;
+      margin-top:-24px;
+      background:radial-gradient(circle at 40% 30%,#ff7898,#b20e43 55%,#650522);
+    }
+
+    .i1{transform:rotate(30deg) translateY(-7px) rotateX(38deg)}
+    .i2{transform:rotate(150deg) translateY(-7px) rotateX(38deg)}
+    .i3{transform:rotate(270deg) translateY(-7px) rotateX(38deg)}
+
+    .stem{
+      width:8px;
+      height:88px;
+      margin:-12px auto 0;
+      border-radius:8px;
+      background:linear-gradient(90deg,#174b27,#3e8a4e,#153d22);
+      transform:rotate(2deg);
+      box-shadow:0 5px 12px rgba(0,0,0,.3);
+    }
+
+    .leaf{
+      position:absolute;
+      width:46px;
+      height:23px;
+      top:112px;
+      border-radius:100% 0 100% 0;
+      background:linear-gradient(135deg,#23713b,#4d9b5e);
+    }
+
+    .leaf.left{left:16px;transform:rotate(-25deg)}
+    .leaf.right{right:12px;transform:scaleX(-1) rotate(-30deg)}
+
+    .floating{
+      position:fixed;
+      z-index:10;
+      top:-50px;
+      pointer-events:none;
+      animation:fall linear forwards;
+      filter:drop-shadow(0 4px 5px rgba(0,0,0,.28));
+    }
+
+    @keyframes fall{
+      0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}
+      10%{opacity:.9}
+      100%{transform:translate3d(var(--drift),115vh,0) rotate(540deg);opacity:0}
+    }
+
+    @media(max-width:520px){
+      .card{padding:12px;border-radius:23px}
+      .typed-area{min-height:370px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <section id="intro" class="intro">
+    <div class="intro-content">
+      <p id="line1" class="intro-line">صبر کن...</p>
+      <p id="line2" class="intro-line">این صفحه فقط برای توست...</p>
 
-    <main class="card">
+      <div id="introHeart" class="intro-heart">❤️</div>
 
-        <img
-            class="photo"
-            src="saba.jpg"
-            alt="کارت عاشقانه برای صبا"
-        >
+      <button id="enterButton" class="enter-button" type="button">
+        لمس کن و وارد قلبم شو
+      </button>
+    </div>
+  </section>
 
-        <h1>صبا جان ❤️</h1>
+  <main class="main">
+    <article class="card">
+      <div class="photo-frame">
+        <img class="photo" src="saba.jpg" alt="کارت عاشقانه برای صبا">
+      </div>
 
-        <div class="message">
-            تو شبیه آرامشی هستی که بعد از هر طوفان،
-            دل به دنبالش می‌گردد.
-            <br><br>
+      <h1 class="title">صبا جان ❤️</h1>
 
-            حضورت، ساده‌ترین لحظه‌های زندگی را
-            به زیباترین خاطره‌ها تبدیل می‌کند.
-            <br><br>
+      <div class="typed-area">
+        <span id="typedText"></span><span class="cursor">|</span>
+      </div>
 
-            لبخندت دلیل روشن روزهایم و نامت
-            زیباترین واژه‌ای‌ست که قلبم می‌شناسد.
-            <br><br>
+      <section class="music-box">
+        <button id="musicButton" class="music-button" type="button">
+          🎵 پخش آهنگ
+        </button>
 
-            دوستت دارم؛ عمیق‌تر از تمام واژه‌ها
-            و ماندگارتر از تمام زمان‌ها. ❤️
+        <div id="progress" class="progress">
+          <div id="progressFill" class="progress-fill"></div>
         </div>
 
-        <div class="music-box">
+        <div id="time" class="time">00:00 / 00:00</div>
 
-            <button
-                id="playButton"
-                class="play-button"
-                type="button"
-            >
-                🎵 آهنگ ما را پخش کن
-            </button>
+        <audio id="music" preload="metadata">
+          <source src="music.mp3" type="audio/mpeg">
+        </audio>
+      </section>
 
-            <div id="status" class="status">
-                برای شنیدن آهنگ، روی دکمه بزن ❤️
-            </div>
+      <section id="ending" class="ending">
+        <div class="ending-text">
+          تا آخرین تپش قلبم، دوستت خواهم داشت... ❤️
+        </div>
 
-            <audio
-                id="music"
-                controls
-                preload="metadata"
-                loop
-            >
-                <source src="music.mp3" type="audio/mpeg">
-                مرورگر شما امکان پخش این فایل صوتی را ندارد.
-            </audio>
-
+        <div class="rose-scene" aria-label="رز قرمز">
+          <div class="rose">
+            <span class="petal p1"></span>
+            <span class="petal p2"></span>
+            <span class="petal p3"></span>
+            <span class="petal p4"></span>
+            <span class="petal p5"></span>
+            <span class="petal p6"></span>
+            <span class="petal inner i1"></span>
+            <span class="petal inner i2"></span>
+            <span class="petal inner i3"></span>
+            <div class="stem"></div>
+            <span class="leaf left"></span>
+            <span class="leaf right"></span>
+          </div>
         </div>
 
         <div class="signature">
-            با تمام قلبم، برای تو ❤️
+          برای صبای عزیزم؛<br>
+          با تمام قلبم و تمام عشقم<br>
+          از طرف کوروش ❤️
         </div>
+      </section>
+    </article>
+  </main>
 
-    </main>
+  <script>
+    const message =
+`تو شبیه آرامشی هستی که بعد از هر طوفان،
+دل به دنبالش می‌گردد.
 
-    <script>
-        const music = document.getElementById("music");
-        const button = document.getElementById("playButton");
-        const statusText = document.getElementById("status");
+حضورت، ساده‌ترین لحظه‌های زندگی را
+به زیباترین خاطره‌ها تبدیل می‌کند.
 
-        button.addEventListener("click", async function () {
-            try {
-                if (music.paused) {
-                    await music.play();
+لبخندت دلیل روشن روزهایم و نامت
+زیباترین واژه‌ای‌ست که قلبم می‌شناسد.
 
-                    button.textContent = "⏸ توقف آهنگ";
-                    statusText.textContent = "آهنگ در حال پخش است ❤️";
-                } else {
-                    music.pause();
+دوستت دارم؛ عمیق‌تر از تمام واژه‌ها
+و ماندگارتر از تمام زمان‌ها. ❤️`;
 
-                    button.textContent = "🎵 آهنگ ما را پخش کن";
-                    statusText.textContent = "آهنگ متوقف شد.";
-                }
-            } catch (error) {
-                console.error(error);
+    const intro = document.getElementById("intro");
+    const line1 = document.getElementById("line1");
+    const line2 = document.getElementById("line2");
+    const introHeart = document.getElementById("introHeart");
+    const enterButton = document.getElementById("enterButton");
+    const typedText = document.getElementById("typedText");
+    const music = document.getElementById("music");
+    const musicButton = document.getElementById("musicButton");
+    const progress = document.getElementById("progress");
+    const progressFill = document.getElementById("progressFill");
+    const time = document.getElementById("time");
+    const ending = document.getElementById("ending");
 
-                button.textContent = "🎵 دوباره تلاش کن";
-                statusText.textContent =
-                    "فایل آهنگ لود نشد؛ نام یا مسیر music.mp3 را بررسی کن.";
-            }
-        });
+    let typingStarted = false;
 
-        music.addEventListener("play", function () {
-            button.textContent = "⏸ توقف آهنگ";
-            statusText.textContent = "آهنگ در حال پخش است ❤️";
-        });
+    setTimeout(() => line1.classList.add("show"), 500);
 
-        music.addEventListener("pause", function () {
-            if (!music.ended) {
-                button.textContent = "🎵 آهنگ ما را پخش کن";
-            }
-        });
+    setTimeout(() => {
+      line1.classList.remove("show");
+      setTimeout(() => line2.classList.add("show"), 650);
+    }, 2400);
 
-        music.addEventListener("error", function () {
-            statusText.textContent =
-                "فایل music.mp3 پیدا نشد یا فرمت آن قابل پخش نیست.";
-        });
+    setTimeout(() => {
+      introHeart.style.display = "block";
+      enterButton.style.display = "block";
+    }, 4700);
 
-        function createHeart() {
-            const heart = document.createElement("div");
+    function startTyping(){
+      if(typingStarted) return;
+      typingStarted = true;
+      let i = 0;
 
-            heart.className = "heart";
-            heart.textContent = Math.random() > 0.5 ? "❤️" : "💕";
-
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = 16 + Math.random() * 24 + "px";
-            heart.style.animationDuration = 5 + Math.random() * 4 + "s";
-
-            document.body.appendChild(heart);
-
-            setTimeout(function () {
-                heart.remove();
-            }, 9000);
+      function next(){
+        if(i < message.length){
+          typedText.textContent += message[i];
+          const current = message[i];
+          i++;
+          setTimeout(next, current === "\n" ? 170 : 45);
+        }else{
+          setTimeout(() => ending.classList.add("show"), 900);
         }
+      }
 
-        setInterval(createHeart, 700);
-    </script>
+      next();
+    }
 
+    enterButton.addEventListener("click", async () => {
+      intro.classList.add("hide");
+      startTyping();
+
+      try{
+        await music.play();
+        musicButton.textContent = "⏸ توقف آهنگ";
+      }catch(error){
+        musicButton.textContent = "🎵 پخش آهنگ";
+      }
+    });
+
+    musicButton.addEventListener("click", async () => {
+      if(music.paused){
+        try{
+          await music.play();
+          musicButton.textContent = "⏸ توقف آهنگ";
+        }catch(error){
+          alert("آهنگ پخش نشد. فایل music.mp3 را بررسی کن.");
+        }
+      }else{
+        music.pause();
+        musicButton.textContent = "🎵 ادامه آهنگ";
+      }
+    });
+
+    music.addEventListener("play", () => {
+      musicButton.textContent = "⏸ توقف آهنگ";
+    });
+
+    music.addEventListener("pause", () => {
+      if(!music.ended) musicButton.textContent = "🎵 ادامه آهنگ";
+    });
+
+    music.addEventListener("ended", () => {
+      musicButton.textContent = "↻ پخش دوباره";
+      ending.classList.add("show");
+    });
+
+    function formatTime(seconds){
+      if(!Number.isFinite(seconds)) return "00:00";
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+    }
+
+    music.addEventListener("timeupdate", () => {
+      const pct = music.duration ? (music.currentTime / music.duration) * 100 : 0;
+      progressFill.style.width = pct + "%";
+      time.textContent = `${formatTime(music.currentTime)} / ${formatTime(music.duration)}`;
+    });
+
+    progress.addEventListener("click", event => {
+      if(!music.duration) return;
+      const rect = progress.getBoundingClientRect();
+      const ratio = (event.clientX - rect.left) / rect.width;
+      music.currentTime = Math.max(0,Math.min(1,ratio)) * music.duration;
+    });
+
+    function createFloating(){
+      const item = document.createElement("div");
+      const symbols = ["❤️","💕","🌹","🌸"];
+      item.className = "floating";
+      item.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      item.style.left = Math.random()*100 + "vw";
+      item.style.fontSize = 17 + Math.random()*22 + "px";
+      item.style.animationDuration = 7 + Math.random()*7 + "s";
+      item.style.setProperty("--drift",(-90 + Math.random()*180) + "px");
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(),14500);
+    }
+
+    setInterval(createFloating,700);
+  </script>
 </body>
 </html>
+'''
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print(path)
