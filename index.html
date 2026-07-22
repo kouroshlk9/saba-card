@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#030208">
-  <title>برای صبا جان — از طرف کوروش ❤️</title>
+  <meta name="theme-color" content="#050307">
+  <title>برای صبا ❤️</title>
 
   <style>
     :root{
-      --rose:#ff5d92;
-      --rose-dark:#9d1247;
-      --gold:#ffd996;
-      --gold-2:#fff1c7;
+      --bg:#050307;
       --text:#fffafc;
-      --glass:rgba(23,10,28,.66);
-      --line:rgba(255,255,255,.13);
+      --muted:#d8cbd1;
+      --rose:#ff5e91;
+      --rose-dark:#a41149;
+      --glass:rgba(25,12,29,.72);
+      --line:rgba(255,255,255,.12);
     }
 
     *{box-sizing:border-box}
@@ -27,346 +27,154 @@
       overflow-x:hidden;
       font-family:Tahoma,Arial,sans-serif;
       color:var(--text);
-      background:#030208;
+      background:var(--bg);
     }
 
     button{font-family:inherit}
 
-    /* ================= INTRO CINEMATIC ================= */
-    .cinema{
+    /* ---------- intro ---------- */
+    .intro{
       position:fixed;
       inset:0;
       z-index:1000;
-      overflow:hidden;
+      display:grid;
+      place-items:center;
+      padding:24px;
       background:
-        radial-gradient(circle at 50% 42%,rgba(110,26,76,.20),transparent 32%),
-        linear-gradient(180deg,#020106 0%,#07030a 56%,#020105 100%);
-      transition:opacity 1.3s ease,visibility 1.3s ease;
+        radial-gradient(circle at center,rgba(99,20,64,.15),transparent 35%),
+        #030205;
+      transition:opacity 1s ease,visibility 1s ease;
     }
 
-    .cinema.hide{
+    .intro.hide{
       opacity:0;
       visibility:hidden;
       pointer-events:none;
     }
 
-    .stars,
-    .stars::before,
-    .stars::after{
-      position:absolute;
-      inset:0;
-      content:"";
-      background-image:
-        radial-gradient(circle,#fff 0 1px,transparent 1.4px),
-        radial-gradient(circle,#ffd9e6 0 1.1px,transparent 1.6px);
-      background-size:92px 92px,137px 137px;
-      background-position:8px 20px,42px 12px;
-      opacity:.28;
-      animation:twinkle 4.8s ease-in-out infinite alternate;
-    }
-
-    .stars::before{
-      transform:scale(1.22) rotate(8deg);
-      opacity:.15;
-    }
-
-    .stars::after{
-      transform:scale(.84) rotate(-9deg);
-      opacity:.22;
-      animation-delay:1.2s;
-    }
-
-    @keyframes twinkle{
-      from{opacity:.12}
-      to{opacity:.38}
-    }
-
-    .nebula{
-      position:absolute;
-      inset:-20%;
-      background:
-        radial-gradient(circle at 20% 30%,rgba(255,92,146,.12),transparent 24%),
-        radial-gradient(circle at 75% 35%,rgba(255,218,154,.08),transparent 21%),
-        radial-gradient(circle at 50% 75%,rgba(152,22,72,.16),transparent 28%);
-      filter:blur(55px);
-      animation:nebula 10s ease-in-out infinite alternate;
-    }
-
-    @keyframes nebula{
-      from{transform:translate3d(-2%,-1%,0) scale(1)}
-      to{transform:translate3d(3%,2%,0) scale(1.08)}
-    }
-
-    .cinema-stage{
-      position:relative;
-      z-index:2;
-      width:100%;
-      height:100%;
-      display:grid;
-      place-items:center;
-      padding:20px;
-    }
-
-    .cinema-inner{
-      width:min(94%,760px);
+    .intro-inner{
+      width:min(94%,680px);
       text-align:center;
     }
 
-    .preline{
-      margin:0 0 18px;
-      opacity:0;
-      transform:translateY(12px);
-      color:#dfcfd6;
-      font-size:14px;
-      letter-spacing:1.8px;
-      transition:opacity .9s ease,transform .9s ease;
-    }
-
-    .preline.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    .name-glow{
+    .intro-line{
+      min-height:92px;
       margin:0;
       opacity:0;
-      transform:scale(.88);
-      font-size:clamp(70px,18vw,170px);
-      line-height:1;
-      letter-spacing:-6px;
-      background:linear-gradient(180deg,#fff 10%,#ffe5ee 62%,#ff9dbb 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      filter:drop-shadow(0 0 0 rgba(255,86,143,0));
-      transition:
-        opacity 1.3s ease,
-        transform 1.6s cubic-bezier(.2,.7,.2,1),
-        filter 1.5s ease;
-    }
-
-    .name-glow.show{
-      opacity:1;
-      transform:scale(1);
-      filter:
-        drop-shadow(0 0 18px rgba(255,126,170,.35))
-        drop-shadow(0 0 48px rgba(255,68,133,.18));
-    }
-
-    .cinema-copy{
-      max-width:560px;
-      margin:22px auto 0;
-      opacity:0;
       transform:translateY(12px);
-      color:#f0e4e8;
-      font-size:clamp(15px,3.8vw,18px);
-      line-height:2;
-      transition:opacity 1s ease,transform 1s ease;
+      font-size:clamp(25px,6.7vw,43px);
+      line-height:1.9;
+      color:#fff;
+      transition:opacity .85s ease,transform .85s ease;
     }
 
-    .cinema-copy.show{
+    .intro-line.show{
       opacity:1;
       transform:translateY(0);
     }
 
-    .cinema-heart{
-      width:96px;
-      height:96px;
-      margin:28px auto 0;
-      display:grid;
-      place-items:center;
-      opacity:0;
-      transform:scale(.7);
-      border-radius:31px;
-      font-size:54px;
-      background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.13);
-      box-shadow:
-        0 20px 55px rgba(255,66,128,.19),
-        inset 0 1px 0 rgba(255,255,255,.12);
-      transition:opacity .9s ease,transform .9s ease;
-    }
-
-    .cinema-heart.show{
-      opacity:1;
-      transform:scale(1);
-      animation:heartbeat 1.3s infinite;
+    .small-heart{
+      display:none;
+      margin:24px auto 0;
+      font-size:42px;
+      animation:heartbeat 1.35s infinite;
+      filter:drop-shadow(0 0 20px rgba(255,84,141,.6));
     }
 
     @keyframes heartbeat{
       0%,100%{transform:scale(1)}
-      16%{transform:scale(1.16)}
-      31%{transform:scale(1)}
-      47%{transform:scale(1.10)}
+      17%{transform:scale(1.18)}
+      32%{transform:scale(1)}
+      48%{transform:scale(1.11)}
     }
 
-    .start-btn{
+    .ready-btn{
       display:none;
-      width:min(100%,430px);
-      min-height:58px;
+      width:min(100%,340px);
+      min-height:54px;
       margin:26px auto 0;
       border:0;
       border-radius:999px;
-      color:#fff;
+      color:white;
       font-size:17px;
       font-weight:bold;
       cursor:pointer;
-      background:linear-gradient(135deg,var(--rose),#df2c6b 48%,var(--rose-dark));
-      box-shadow:
-        0 18px 48px rgba(220,43,105,.30),
-        inset 0 1px 0 rgba(255,255,255,.20);
-      animation:fadeUp .9s ease both;
+      background:linear-gradient(135deg,var(--rose),var(--rose-dark));
+      box-shadow:0 16px 42px rgba(214,41,103,.28);
+      animation:fadeUp .8s ease both;
     }
 
     @keyframes fadeUp{
-      from{opacity:0;transform:translateY(14px)}
+      from{opacity:0;transform:translateY(12px)}
       to{opacity:1;transform:translateY(0)}
     }
 
-    .start-note{
-      display:none;
-      margin-top:12px;
-      color:#c9b8c0;
-      font-size:12px;
-      animation:fadeUp .9s ease .15s both;
-    }
-
-    /* ================= MAIN EXPERIENCE ================= */
+    /* ---------- main ---------- */
     .page{
-      position:relative;
       min-height:100vh;
-      overflow:hidden;
+      padding:24px 12px 80px;
       background:
-        linear-gradient(180deg,rgba(5,2,7,.10),rgba(5,2,7,.80) 76%,#050207 100%),
+        linear-gradient(rgba(7,3,9,.28),rgba(7,3,9,.84)),
         url("saba.jpg") center top/cover fixed;
     }
 
-    .page::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 20%,rgba(255,174,195,.15),transparent 29%),
-        linear-gradient(90deg,rgba(5,2,7,.72),rgba(5,2,7,.12) 48%,rgba(5,2,7,.72));
-    }
-
-    .scene{
-      position:relative;
-      z-index:2;
-      width:min(94%,900px);
+    .card{
+      width:min(94%,760px);
       margin:0 auto;
-      padding:28px 0 90px;
-      perspective:1200px;
-    }
-
-    .camera-card{
-      transform:translateZ(-180px) scale(.84);
-      opacity:.35;
-      animation:cameraMove 3.8s cubic-bezier(.2,.8,.2,1) forwards;
-      transform-origin:center top;
-      border:1px solid var(--line);
-      border-radius:38px;
       padding:16px;
-      background:rgba(16,7,19,.60);
-      backdrop-filter:blur(18px);
-      box-shadow:
-        0 35px 110px rgba(0,0,0,.62),
-        inset 0 1px 0 rgba(255,255,255,.08);
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:var(--glass);
+      backdrop-filter:blur(16px);
+      box-shadow:0 30px 100px rgba(0,0,0,.6);
     }
 
-    @keyframes cameraMove{
-      0%{
-        transform:translateZ(-220px) scale(.78);
-        opacity:.15;
-        filter:blur(9px);
-      }
-      55%{
-        opacity:.85;
-      }
-      100%{
-        transform:translateZ(0) scale(1);
-        opacity:1;
-        filter:blur(0);
-      }
-    }
-
-    .image-shell{
-      position:relative;
+    .image-wrap{
       overflow:hidden;
-      border-radius:28px;
-      background:#150a15;
-      box-shadow:0 20px 65px rgba(0,0,0,.45);
+      border-radius:22px;
+      box-shadow:0 18px 50px rgba(0,0,0,.45);
     }
 
-    .image-shell::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg,transparent 56%,rgba(12,4,11,.32)),
-        radial-gradient(circle at 50% 42%,transparent 42%,rgba(7,2,7,.17) 100%);
-    }
-
-    .main-image{
+    .image{
       display:block;
       width:100%;
-      max-height:820px;
+      max-height:760px;
       object-fit:contain;
-      animation:kenBurns 17s ease-in-out infinite alternate;
+      background:rgba(0,0,0,.14);
+      animation:slowZoom 15s ease-in-out infinite alternate;
     }
 
-    @keyframes kenBurns{
+    @keyframes slowZoom{
       from{transform:scale(1)}
-      to{transform:scale(1.045)}
+      to{transform:scale(1.035)}
     }
 
-    .story{
-      padding:36px 24px 20px;
+    .content{
+      padding:30px 18px 18px;
       text-align:center;
     }
 
-    .story-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:14px;
-      padding:8px 14px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;
-      color:#ffd6e2;
-      background:rgba(255,255,255,.055);
-      font-size:12px;
-    }
-
-    .story-title{
+    .title{
       margin:0;
-      font-size:clamp(36px,8vw,62px);
-      line-height:1.4;
-      background:linear-gradient(180deg,#fff 10%,#ffe0e9 68%,#ff9fbc);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      letter-spacing:-1px;
+      font-size:clamp(32px,7vw,50px);
+      color:#ffdbe5;
     }
 
-    .story-subtitle{
-      margin:10px auto 28px;
-      color:#d8c7ce;
+    .subtitle{
+      margin:10px 0 26px;
+      color:var(--muted);
+      line-height:1.9;
       font-size:15px;
     }
 
     .divider{
-      width:94px;
+      width:82px;
       height:1px;
-      margin:0 auto 30px;
-      background:linear-gradient(90deg,transparent,#ff8fb0,transparent);
-      box-shadow:0 0 16px rgba(255,91,141,.54);
+      margin:0 auto 28px;
+      background:linear-gradient(90deg,transparent,#ff8fb1,transparent);
     }
 
-    .typed-wrap{
+    .typed-area{
       min-height:340px;
       display:flex;
       justify-content:center;
@@ -374,335 +182,261 @@
     }
 
     .typed-text{
-      max-width:680px;
+      max-width:660px;
       white-space:pre-line;
       line-height:2.25;
-      font-size:clamp(17px,4vw,21px);
+      font-size:clamp(17px,4vw,20px);
       color:#fff9fb;
     }
 
     .cursor{
       display:inline-block;
       margin-right:3px;
-      color:#ff8eb0;
+      color:#ff8fb1;
       animation:blink .8s infinite;
     }
 
     @keyframes blink{50%{opacity:0}}
 
-    .player{
+    .aside{
+      min-height:92px;
       margin-top:22px;
-      padding:18px;
-      border:1px solid rgba(255,255,255,.11);
-      border-radius:24px;
-      background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+      opacity:0;
+      transform:translateY(12px);
+      transition:opacity 1s ease,transform 1s ease;
+      color:#ffdce6;
+      font-size:clamp(18px,4.5vw,24px);
+      line-height:2;
     }
 
-    .player-top{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      direction:rtl;
+    .aside.show{
+      opacity:1;
+      transform:translateY(0);
     }
 
-    .album-icon{
-      flex:0 0 54px;
-      width:54px;
-      height:54px;
-      display:grid;
-      place-items:center;
-      border-radius:18px;
-      font-size:25px;
-      background:linear-gradient(145deg,#fa5c8d,#82113d);
-      box-shadow:0 10px 25px rgba(218,40,102,.25);
-    }
-
-    .track-info{
-      flex:1;
-      min-width:0;
-      text-align:right;
-    }
-
-    .track-title{
-      margin:0;
-      font-size:15px;
-      color:#fff;
-    }
-
-    .track-subtitle{
-      margin:5px 0 0;
-      font-size:12px;
-      color:#cdbbc2;
+    .player{
+      margin-top:24px;
+      padding:17px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.055);
     }
 
     .play-btn{
-      flex:0 0 auto;
-      min-width:118px;
-      min-height:46px;
-      padding:11px 18px;
+      width:100%;
+      min-height:50px;
       border:0;
       border-radius:999px;
-      color:#fff;
+      color:white;
+      font-size:16px;
       font-weight:bold;
       cursor:pointer;
-      background:linear-gradient(135deg,#ff5b8f,#a71049);
-      box-shadow:0 10px 28px rgba(225,40,105,.24);
+      background:linear-gradient(135deg,var(--rose),var(--rose-dark));
     }
 
     .progress{
       height:7px;
-      margin-top:17px;
+      margin-top:16px;
       overflow:hidden;
       border-radius:999px;
-      background:rgba(255,255,255,.13);
       cursor:pointer;
+      background:rgba(255,255,255,.13);
     }
 
     .progress-fill{
       width:0;
       height:100%;
-      border-radius:inherit;
-      background:linear-gradient(90deg,#ffd1df,#ff4f87);
-      box-shadow:0 0 14px rgba(255,77,133,.55);
+      background:linear-gradient(90deg,#ffd0df,#ff4f86);
     }
 
     .time{
       margin-top:8px;
       direction:ltr;
       text-align:left;
-      color:#c7b5bc;
+      color:#c8b8bf;
       font-size:12px;
     }
 
-    .ending{
-      margin-top:48px;
-      opacity:0;
-      transform:translateY(20px) scale(.98);
-      transition:opacity 1.4s ease,transform 1.4s ease;
-    }
-
-    .ending.show{
-      opacity:1;
-      transform:translateY(0) scale(1);
-    }
-
-    .ending-line{
-      margin:0 auto;
-      max-width:680px;
-      font-size:clamp(21px,5vw,31px);
-      line-height:2;
-      color:#ffe5ed;
-    }
-
-    .gold-signature{
-      margin-top:24px;
-      font-size:clamp(20px,5vw,28px);
-      line-height:1.9;
-      background:
-        linear-gradient(90deg,#d6a956 0%,#fff1b8 24%,#f3c875 50%,#fff6d5 74%,#ca9846 100%);
-      background-size:200% auto;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow:0 10px 35px rgba(255,205,103,.10);
-      animation:goldShimmer 3.5s linear infinite;
-    }
-
-    @keyframes goldShimmer{
-      to{background-position:200% center}
-    }
-
-    .gold-signature strong{
-      font-size:1.18em;
-    }
-
-    .final-heart{
-      width:116px;
-      height:116px;
-      margin:30px auto 4px;
-      position:relative;
+    /* ---------- finale overlay ---------- */
+    .finale{
+      position:fixed;
+      inset:0;
+      z-index:900;
       display:grid;
       place-items:center;
-      border-radius:50%;
+      padding:24px;
+      opacity:0;
+      visibility:hidden;
       background:
-        radial-gradient(circle at 35% 30%,rgba(255,255,255,.28),transparent 22%),
-        radial-gradient(circle,#ff5e8f 0%,#bd174f 47%,#44091f 100%);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.15),
-        0 0 52px rgba(255,70,130,.40),
-        inset -18px -20px 30px rgba(40,0,17,.35);
-      animation:orbFloat 4s ease-in-out infinite;
+        radial-gradient(circle at center,rgba(105,20,67,.14),transparent 34%),
+        rgba(2,1,3,.96);
+      transition:opacity 1.2s ease,visibility 1.2s ease;
     }
 
-    .final-heart::before,
-    .final-heart::after{
-      content:"";
-      position:absolute;
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:50%;
-      animation:ring 3.2s ease-out infinite;
+    .finale.show{
+      opacity:1;
+      visibility:visible;
     }
 
-    .final-heart::before{inset:-12px}
-    .final-heart::after{inset:-26px;animation-delay:1.1s}
-
-    .final-heart span{
-      font-size:50px;
-      filter:drop-shadow(0 7px 14px rgba(68,0,22,.45));
+    .finale-inner{
+      width:min(94%,650px);
+      text-align:center;
     }
 
-    @keyframes orbFloat{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
+    .finale-line{
+      min-height:86px;
+      margin:0;
+      opacity:0;
+      transform:translateY(12px);
+      font-size:clamp(24px,6vw,40px);
+      line-height:1.9;
+      transition:opacity .9s ease,transform .9s ease;
     }
 
-    @keyframes ring{
-      0%{transform:scale(.82);opacity:.7}
-      100%{transform:scale(1.28);opacity:0}
+    .finale-line.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .signature{
+      display:none;
+      margin-top:26px;
+      color:#ffd7e3;
+      font-size:clamp(22px,5vw,32px);
+      line-height:2;
+      animation:fadeUp 1s ease both;
+    }
+
+    .signature strong{
+      display:block;
+      margin-top:8px;
+      color:#fff;
+      font-size:1.25em;
+    }
+
+    .replay{
+      display:none;
+      width:min(100%,300px);
+      min-height:50px;
+      margin:24px auto 0;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      cursor:pointer;
+      animation:fadeUp 1s ease both;
     }
 
     .particle{
       position:fixed;
-      z-index:6;
-      top:-50px;
+      z-index:5;
+      top:-40px;
       pointer-events:none;
       animation:fall linear forwards;
-      filter:drop-shadow(0 4px 7px rgba(0,0,0,.28));
+      filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));
     }
 
     @keyframes fall{
-      0%{
-        transform:translate3d(0,-10vh,0) rotate(0deg);
-        opacity:0;
-      }
-      10%{opacity:.9}
-      100%{
-        transform:translate3d(var(--drift),112vh,0) rotate(540deg);
-        opacity:0;
-      }
+      0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0}
+      10%{opacity:.85}
+      100%{transform:translate3d(var(--drift),112vh,0) rotate(500deg);opacity:0}
     }
 
-    @media(max-width:600px){
-      .scene{width:calc(100% - 18px);padding-top:9px}
-      .camera-card{padding:9px;border-radius:25px}
-      .image-shell{border-radius:20px}
-      .story{padding:29px 12px 17px}
-      .typed-wrap{min-height:390px}
-      .player-top{flex-wrap:wrap}
-      .play-btn{width:100%}
-      .track-info{text-align:center}
-      .album-icon{margin:auto}
-      .name-glow{letter-spacing:-3px}
+    @media(max-width:560px){
+      .card{padding:10px;border-radius:23px}
+      .content{padding:27px 12px 14px}
+      .typed-area{min-height:395px}
     }
 
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{
         animation-duration:.01ms!important;
         animation-iteration-count:1!important;
-        scroll-behavior:auto!important;
       }
     }
   </style>
 </head>
 
 <body>
-  <section id="cinema" class="cinema">
-    <div class="stars"></div>
-    <div class="nebula"></div>
-
-    <div class="cinema-stage">
-      <div class="cinema-inner">
-        <p id="preline" class="preline">این صفحه فقط برای یک نفر ساخته شده...</p>
-        <h1 id="nameGlow" class="name-glow">صبا</h1>
-
-        <p id="cinemaCopy" class="cinema-copy">
-          برای کسی که حضورش، ساده‌ترین لحظه‌ها را
-          به زیباترین خاطره‌ها تبدیل می‌کند.
-        </p>
-
-        <div id="cinemaHeart" class="cinema-heart">❤️</div>
-
-        <button id="startButton" class="start-btn" type="button">
-          وارد این قصه شو و آهنگ را پخش کن
-        </button>
-
-        <div id="startNote" class="start-note">
-          بهتر است صدا روشن باشد
-        </div>
-      </div>
+  <section id="intro" class="intro">
+    <div class="intro-inner">
+      <p id="introLine" class="intro-line"></p>
+      <div id="smallHeart" class="small-heart">❤️</div>
+      <button id="readyButton" class="ready-btn" type="button">آماده‌ام</button>
     </div>
   </section>
 
   <main class="page">
-    <div class="scene">
-      <article class="camera-card">
-        <div class="image-shell">
-          <img class="main-image" src="saba.jpg" alt="کارت عاشقانه برای صبا">
+    <article class="card">
+      <div class="image-wrap">
+        <img class="image" src="saba.jpg" alt="برای صبا">
+      </div>
+
+      <section class="content">
+        <h1 class="title">صبا جان ❤️</h1>
+
+        <p class="subtitle">
+          شاید این صفحه خیلی ساده باشد؛
+          اما حرف‌هایش واقعی‌اند.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="typed-area">
+          <div>
+            <span id="typedText" class="typed-text"></span>
+            <span class="cursor">|</span>
+          </div>
         </div>
 
-        <section class="story">
-          <div class="story-kicker">یک قصه کوتاه، از قلب کوروش برای صبا ✨</div>
+        <div id="aside" class="aside">
+          راستی...<br>
+          ممنونم که هستی. 🌹
+        </div>
 
-          <h1 class="story-title">صبا جان ❤️</h1>
-          <p class="story-subtitle">
-            اینجا فقط یک صفحه نیست؛ بخشی کوچک از احساسی‌ست که برای تو دارم.
-          </p>
+        <section class="player">
+          <button id="playButton" class="play-btn" type="button">
+            پخش آهنگ
+          </button>
 
-          <div class="divider"></div>
-
-          <div class="typed-wrap">
-            <div>
-              <span id="typedText" class="typed-text"></span>
-              <span class="cursor">|</span>
-            </div>
+          <div id="progress" class="progress">
+            <div id="progressFill" class="progress-fill"></div>
           </div>
 
-          <section class="player">
-            <div class="player-top">
-              <div class="album-icon">🎵</div>
+          <div id="time" class="time">00:00 / 00:00</div>
 
-              <div class="track-info">
-                <p class="track-title">آهنگ ما</p>
-                <p class="track-subtitle">برای لحظه‌ای که فقط متعلق به ماست</p>
-              </div>
-
-              <button id="playButton" class="play-btn" type="button">
-                پخش آهنگ
-              </button>
-            </div>
-
-            <div id="progress" class="progress">
-              <div id="progressFill" class="progress-fill"></div>
-            </div>
-
-            <div id="time" class="time">00:00 / 00:00</div>
-
-            <audio id="music" preload="metadata">
-              <source src="music.mp3" type="audio/mpeg">
-            </audio>
-          </section>
-
-          <section id="ending" class="ending">
-            <p class="ending-line">
-              شاید نتوانم تمام احساسم را در واژه‌ها جا بدهم؛
-              اما می‌توانم هر روز دوباره انتخابت کنم.
-            </p>
-
-            <div class="final-heart"><span>❤️</span></div>
-
-            <div class="gold-signature">
-              با تمام قلبم و تمام عشقم<br>
-              <strong>از طرف کوروش</strong>
-            </div>
-          </section>
+          <audio id="music" preload="metadata">
+            <source src="music.mp3" type="audio/mpeg">
+          </audio>
         </section>
-      </article>
-    </div>
+      </section>
+    </article>
   </main>
 
+  <section id="finale" class="finale">
+    <div class="finale-inner">
+      <p id="finaleLine" class="finale-line"></p>
+
+      <div id="signature" class="signature">
+        با عشق...
+        <strong>کوروش ❤️</strong>
+      </div>
+
+      <button id="replayButton" class="replay" type="button">
+        دوباره دیدن
+      </button>
+    </div>
+  </section>
+
   <script>
-    const message =
+    const introMessages = [
+      "سلام صبا 😊",
+      "یه چیزی هست که دلم می‌خواست فقط خودت ببینیش...",
+      "شاید هیچ‌وقت نتونم همه‌ی حسم رو با حرف زدن بگم...",
+      "ولی گفتم شاید اینجوری بهتر بتونم نشونش بدم."
+    ];
+
+    const mainMessage =
 `تو شبیه آرامشی هستی که بعد از هر طوفان،
 دل به دنبالش می‌گردد.
 
@@ -715,62 +449,86 @@
 دوستت دارم؛ عمیق‌تر از تمام واژه‌ها
 و ماندگارتر از تمام زمان‌ها. ❤️`;
 
-    const cinema = document.getElementById("cinema");
-    const preline = document.getElementById("preline");
-    const nameGlow = document.getElementById("nameGlow");
-    const cinemaCopy = document.getElementById("cinemaCopy");
-    const cinemaHeart = document.getElementById("cinemaHeart");
-    const startButton = document.getElementById("startButton");
-    const startNote = document.getElementById("startNote");
+    const finaleMessages = [
+      "اگر تا اینجا موندی...",
+      "یعنی ارزشش رو داشت که اینو برات بسازم.",
+      "دوستت دارم ❤️"
+    ];
+
+    const intro = document.getElementById("intro");
+    const introLine = document.getElementById("introLine");
+    const smallHeart = document.getElementById("smallHeart");
+    const readyButton = document.getElementById("readyButton");
 
     const typedText = document.getElementById("typedText");
+    const aside = document.getElementById("aside");
     const music = document.getElementById("music");
     const playButton = document.getElementById("playButton");
     const progress = document.getElementById("progress");
     const progressFill = document.getElementById("progressFill");
     const timeLabel = document.getElementById("time");
-    const ending = document.getElementById("ending");
+
+    const finale = document.getElementById("finale");
+    const finaleLine = document.getElementById("finaleLine");
+    const signature = document.getElementById("signature");
+    const replayButton = document.getElementById("replayButton");
 
     let typingStarted = false;
+    let introIndex = 0;
 
-    setTimeout(()=>preline.classList.add("show"),500);
-    setTimeout(()=>nameGlow.classList.add("show"),1500);
-    setTimeout(()=>cinemaCopy.classList.add("show"),3000);
-    setTimeout(()=>cinemaHeart.classList.add("show"),4200);
+    function showIntroMessage(){
+      introLine.classList.remove("show");
 
-    setTimeout(()=>{
-      startButton.style.display="block";
-      startNote.style.display="block";
-    },5200);
+      setTimeout(()=>{
+        introLine.textContent = introMessages[introIndex];
+        introLine.classList.add("show");
 
-    function typeMessage(){
+        setTimeout(()=>{
+          introIndex++;
+
+          if(introIndex < introMessages.length){
+            showIntroMessage();
+          }else{
+            setTimeout(()=>{
+              smallHeart.style.display = "block";
+              readyButton.style.display = "block";
+            },900);
+          }
+        },2100);
+      },450);
+    }
+
+    showIntroMessage();
+
+    function typeMainMessage(){
       if(typingStarted) return;
       typingStarted = true;
+
       let index = 0;
 
-      function typeNext(){
-        if(index < message.length){
-          typedText.textContent += message[index];
-          const current = message[index];
+      function next(){
+        if(index < mainMessage.length){
+          typedText.textContent += mainMessage[index];
+          const current = mainMessage[index];
           index++;
-          setTimeout(typeNext,current === "\n" ? 165 : 43);
+          setTimeout(next,current === "\n" ? 170 : 45);
         }else{
-          setTimeout(()=>ending.classList.add("show"),900);
+          setTimeout(()=>aside.classList.add("show"),1200);
         }
       }
 
-      typeNext();
+      next();
     }
 
-    startButton.addEventListener("click",async()=>{
-      cinema.classList.add("hide");
-      typeMessage();
+    readyButton.addEventListener("click",async()=>{
+      intro.classList.add("hide");
+      typeMainMessage();
 
       try{
         await music.play();
-        playButton.textContent="توقف آهنگ";
+        playButton.textContent = "توقف آهنگ";
       }catch(error){
-        playButton.textContent="پخش آهنگ";
+        playButton.textContent = "پخش آهنگ";
       }
     });
 
@@ -778,66 +536,96 @@
       if(music.paused){
         try{
           await music.play();
-          playButton.textContent="توقف آهنگ";
+          playButton.textContent = "توقف آهنگ";
         }catch(error){
           alert("آهنگ پخش نشد. فایل music.mp3 را بررسی کن.");
         }
       }else{
         music.pause();
-        playButton.textContent="ادامه آهنگ";
+        playButton.textContent = "ادامه آهنگ";
       }
     });
 
     music.addEventListener("play",()=>{
-      playButton.textContent="توقف آهنگ";
+      playButton.textContent = "توقف آهنگ";
     });
 
     music.addEventListener("pause",()=>{
-      if(!music.ended) playButton.textContent="ادامه آهنگ";
-    });
-
-    music.addEventListener("ended",()=>{
-      playButton.textContent="پخش دوباره";
-      ending.classList.add("show");
+      if(!music.ended) playButton.textContent = "ادامه آهنگ";
     });
 
     function formatTime(seconds){
       if(!Number.isFinite(seconds)) return "00:00";
-      const m=Math.floor(seconds/60);
-      const s=Math.floor(seconds%60);
+      const m = Math.floor(seconds/60);
+      const s = Math.floor(seconds%60);
       return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
     }
 
     music.addEventListener("timeupdate",()=>{
-      const percent=music.duration ? (music.currentTime/music.duration)*100 : 0;
-      progressFill.style.width=percent+"%";
-      timeLabel.textContent=
+      const percent = music.duration ? (music.currentTime/music.duration)*100 : 0;
+      progressFill.style.width = percent + "%";
+      timeLabel.textContent =
         `${formatTime(music.currentTime)} / ${formatTime(music.duration)}`;
     });
 
     progress.addEventListener("click",event=>{
       if(!music.duration) return;
-      const rect=progress.getBoundingClientRect();
-      const ratio=(event.clientX-rect.left)/rect.width;
-      music.currentTime=Math.max(0,Math.min(1,ratio))*music.duration;
+      const rect = progress.getBoundingClientRect();
+      const ratio = (event.clientX - rect.left)/rect.width;
+      music.currentTime = Math.max(0,Math.min(1,ratio))*music.duration;
+    });
+
+    function showFinale(){
+      finale.classList.add("show");
+      let i = 0;
+
+      function nextLine(){
+        finaleLine.classList.remove("show");
+
+        setTimeout(()=>{
+          finaleLine.textContent = finaleMessages[i];
+          finaleLine.classList.add("show");
+
+          setTimeout(()=>{
+            i++;
+
+            if(i < finaleMessages.length){
+              nextLine();
+            }else{
+              setTimeout(()=>{
+                signature.style.display = "block";
+                replayButton.style.display = "block";
+              },1100);
+            }
+          },2200);
+        },450);
+      }
+
+      nextLine();
+    }
+
+    music.addEventListener("ended",showFinale);
+
+    replayButton.addEventListener("click",()=>{
+      location.reload();
     });
 
     function createParticle(){
-      const particle=document.createElement("div");
-      const symbols=["✦","✨","❤️","🌸","✧"];
+      const particle = document.createElement("div");
+      const symbols = ["❤️","🌸","✨"];
 
-      particle.className="particle";
-      particle.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-      particle.style.left=Math.random()*100+"vw";
-      particle.style.fontSize=13+Math.random()*18+"px";
-      particle.style.animationDuration=8+Math.random()*8+"s";
-      particle.style.setProperty("--drift",(-110+Math.random()*220)+"px");
+      particle.className = "particle";
+      particle.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      particle.style.left = Math.random()*100 + "vw";
+      particle.style.fontSize = 14 + Math.random()*16 + "px";
+      particle.style.animationDuration = 8 + Math.random()*7 + "s";
+      particle.style.setProperty("--drift",(-90 + Math.random()*180) + "px");
 
       document.body.appendChild(particle);
-      setTimeout(()=>particle.remove(),16500);
+      setTimeout(()=>particle.remove(),15500);
     }
 
-    setInterval(createParticle,720);
+    setInterval(createParticle,1000);
   </script>
 </body>
 </html>
